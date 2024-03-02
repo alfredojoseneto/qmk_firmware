@@ -15,56 +15,128 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #include QMK_KEYBOARD_H
+#include "quantum/keymap_extras/keymap_brazilian_abnt2.h"
+#include "quantum/keymap_extras/sendstring_brazilian_abnt2.h"
+
+
+enum custom_keycodes {
+  QMKBEST = SAFE_RANGE,
+  VIM_SEL,
+  SFT_ENT,
+  TMX_WIN,
+  EXCL_FLT,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case QMKBEST:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING("QMK is the best thing ever!");
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+    case TMX_WIN:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING(SS_DOWN(X_LCTL) "b" SS_UP(X_LCTL) "w");
+        return false;
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+    case VIM_SEL:
+      if (record->event.pressed) {
+        // when keycode is pressed
+        SEND_STRING(SS_TAP(X_ESC));
+        SEND_STRING("vap");
+        return false;
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+    case SFT_ENT:
+      if (record->event.pressed) {
+        // when keycode QMKBEST is pressed
+        SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_ENT) SS_UP(X_LSFT) SS_TAP(X_ESC));
+        return false;
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+    case EXCL_FLT:
+      if (record->event.pressed) {
+        // when keycode is pressed
+        SEND_STRING(SS_TAP(X_LALT) "s" "f" "1");
+        SEND_STRING(SS_DOWN(X_LCTL) "*" SS_UP(X_LCTL));
+        SEND_STRING(SS_TAP(X_LALT) "c" "o" "t");
+        SEND_STRING(SS_TAP(X_LALT) "k" "s" "r");
+        return false;
+      } else {
+        // when keycode QMKBEST is released
+      }
+      break;
+
+  }
+
+    return true;
+  };
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_split_3x6_3(
+  [0] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, KC_QUOT,
+      CTL_ESC,    KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                         KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_ESC,
+      KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(1),  KC_SPC,     KC_ENT,   MO(2), KC_RALT
+                                            MO(3),   MO(1),  KC_ENT,     KC_SPC,   MO(2), ALT_GUI
                                       //`--------------------------'  `--------------------------'
 
   ),
 
-    [1] = LAYOUT_split_3x6_3(
+  [1] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+      CTL_ESC, XXXXXXX, KC_CAPS, VIM_SEL, SFT_ENT, TMX_WIN,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      KC_LSFT,EXCL_FLT,DSK_LEFT, ALT_TAB,DSK_RGHT, C(KC_B),                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT,   MO(3), KC_RALT
+                                          _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [2] = LAYOUT_split_3x6_3(
+  [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+       KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_LPRN,                      KC_RPRN, KC_AMPR, KC_ASTR, BR_QUES, KC_LCBR, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,  KC_GRV,
+      CTL_ESC, BR_PERC, BR_BSLS, BR_TILD, KC_UNDS, KC_RBRC,                      KC_BSLS,  KC_EQL, BR_DQUO, BR_SLSH, BR_CIRC, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      KC_UNDS, KC_PLUS, KC_LCBR, KC_RCBR, KC_PIPE, KC_TILD,
+      KC_LSFT, BR_LABK, BR_PIPE, KC_LBRC, KC_MINS, KC_RCBR,                      KC_PIPE, KC_PLUS, BR_QUOT, BR_COLN, BR_RABK, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI,   MO(3),  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
-    [3] = LAYOUT_split_3x6_3(
+  [3] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,                      KC_MUTE, KC_VOLU, KC_BRIU, XXXXXXX, XXXXXXX, KC_PSCR,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX,                      XXXXXXX, KC_VOLD, KC_BRID, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, _______,  KC_SPC,     KC_ENT, _______, KC_RALT
+                                          _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
   )
 };
+
