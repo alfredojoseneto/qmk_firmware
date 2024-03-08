@@ -42,7 +42,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case TMX_WIN:
       if (record->event.pressed) {
         // when keycode QMKBEST is pressed
-        SEND_STRING(SS_DOWN(X_LCTL) "b" SS_UP(X_LCTL) "w");
+        // SEND_STRING(SS_DOWN(X_LCTL) "b" SS_UP(X_LCTL) "w");
+        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_B) SS_UP(X_LCTL) SS_TAP(X_W));
         return false;
       } else {
         // when keycode QMKBEST is released
