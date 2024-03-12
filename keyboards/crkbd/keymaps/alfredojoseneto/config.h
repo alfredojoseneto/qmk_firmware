@@ -39,6 +39,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // defining some keycodes for better layout representation
 #define ALT_TAB LALT(KC_TAB)
 #define ALT_GUI LALT_T(KC_LGUI)
+#define GUI_TAB G(KC_TAB)
 #define CTL_ESC LCTL_T(KC_ESC)
 #define DSK_LEFT G(C(KC_LEFT))
 #define DSK_RGHT G(C(KC_RIGHT))
