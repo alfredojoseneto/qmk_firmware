@@ -21,28 +21,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 enum custom_keycodes {
-  QMKBEST = SAFE_RANGE,
-  VIM_SEL,
+  VIM_SEL = SAFE_RANGE,
   SFT_ENT,
   TMX_WIN,
   EXCL_FLT,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
   switch (keycode) {
-    case QMKBEST:
-      if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("QMK is the best thing ever!");
-      } else {
-        // when keycode QMKBEST is released
-      }
-      break;
 
     case TMX_WIN:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        // SEND_STRING(SS_DOWN(X_LCTL) "b" SS_UP(X_LCTL) "w");
         SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(10) SS_TAP(X_B) SS_UP(X_LCTL) SS_DELAY(10) SS_TAP(X_W));
         return false;
       } else {
@@ -63,7 +53,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case SFT_ENT:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
         SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_ENT) SS_UP(X_LSFT) SS_TAP(X_ESC));
         return false;
       } else {
