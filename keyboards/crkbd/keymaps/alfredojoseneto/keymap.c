@@ -21,13 +21,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 enum custom_keycodes {
-  VIM_SEL = SAFE_RANGE,
+  CAPS_LT = SAFE_RANGE,
+  VIM_SEL,
   SFT_ENT,
   TMX_WIN,
   EXCL_FLT,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  static uint16_t internal_timer;
 
   switch (keycode) {
 
@@ -35,8 +37,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(10) SS_TAP(X_B) SS_UP(X_LCTL) SS_DELAY(10) SS_TAP(X_W));
         return false;
-      } else {
-        // when keycode QMKBEST is released
       }
       break;
 
@@ -46,8 +46,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_TAP(X_ESC));
         SEND_STRING("vap");
         return false;
-      } else {
-        // when keycode QMKBEST is released
       }
       break;
 
@@ -55,23 +53,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_ENT) SS_UP(X_LSFT) SS_TAP(X_ESC));
         return false;
-      } else {
-        // when keycode QMKBEST is released
       }
       break;
 
     case EXCL_FLT:
       if (record->event.pressed) {
-        // when keycode is pressed
         SEND_STRING(SS_TAP(X_LALT) "s" "f" "1");
         SEND_STRING(SS_DOWN(X_LCTL) "*" SS_UP(X_LCTL));
         SEND_STRING(SS_TAP(X_LALT) "c" "o" "t");
         SEND_STRING(SS_TAP(X_LALT) "k" "s" "r");
         return false;
-      } else {
-        // when keycode QMKBEST is released
       }
       break;
+
+    case CAPS_LT:
+      if (record->event.pressed) {
+        internal_timer = timer_read();
+        layer_on(3);
+      } else {
+        layer_off(3);
+        if (timer_elapsed(internal_timer) < TAPPING_TERM) {
+          tap_code16(KC_CAPS);
+        }
+      }
+      return false;
 
   }
 
@@ -88,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,    KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                         KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                            MO(3),   MO(1),  KC_ENT,     KC_SPC,   MO(2), ALT_GUI
+                                          CAPS_LT,   MO(1),  KC_ENT,     KC_SPC,   MO(2), ALT_GUI
                                       //`--------------------------'  `--------------------------'
 
   ),
@@ -97,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      CTL_ESC, XXXXXXX, KC_CAPS, VIM_SEL, SFT_ENT, TMX_WIN,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
+      CTL_ESC, XXXXXXX, XXXXXXX, VIM_SEL, SFT_ENT, TMX_WIN,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_LSFT,EXCL_FLT,DSK_LEFT, ALT_TAB,DSK_RGHT, C(KC_B),                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
