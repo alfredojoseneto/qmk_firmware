@@ -114,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_LPRN,                      KC_RPRN, KC_AMPR, KC_ASTR, BR_QUES, KC_LCBR, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      CTL_ESC, BR_PERC, BR_BSLS, BR_TILD, KC_UNDS, KC_RBRC,                      KC_BSLS,  KC_EQL, BR_DQUO, BR_SLSH, BR_CIRC, CTL_ESC,
+      CTL_ESC, BR_PERC, BR_BSLS, BR_TILD, KC_LBRC, KC_RBRC,                      KC_BSLS,  KC_EQL, BR_DQUO, BR_SLSH, BR_CIRC, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, BR_LABK, BR_PIPE, KC_LBRC, KC_MINS, KC_RCBR,                      KC_PIPE, KC_PLUS, BR_QUOT, BR_COLN, BR_RABK, KC_LSFT,
+      KC_LSFT, BR_LABK, BR_PIPE, KC_UNDS, KC_MINS, KC_RCBR,                      KC_PIPE, KC_PLUS, BR_QUOT, BR_COLN, BR_RABK, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
