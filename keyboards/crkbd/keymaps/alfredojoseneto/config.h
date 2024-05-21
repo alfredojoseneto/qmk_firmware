@@ -30,7 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
-
+#undef TAPPING_TERM
 #define TAPPING_TERM 150
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
@@ -45,6 +45,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DSK_RGHT G(C(KC_RIGHT))
 #define CTRL_C C(KC_C)
 #define CTRL_SV C(S(KC_V))
+
+// home rows left side
+#define HR_GA LGUI_T(KC_A)
+#define HR_AS LALT_T(KC_S)
+#define HR_CD LCTL_T(KC_D)
+#define HR_SF LSFT_T(KC_F)
+
+// home rows right side
+#define HR_SJ RSFT_T(KC_J)
+#define HR_CK RCTL_T(KC_K)
+#define HR_AL LALT_T(KC_L)
+#define HR_GSCLN RGUI_T(KC_SCLN)
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
