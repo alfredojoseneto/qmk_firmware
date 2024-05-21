@@ -44,7 +44,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DSK_LEFT G(C(KC_LEFT))
 #define DSK_RGHT G(C(KC_RIGHT))
 #define CTRL_C C(KC_C)
-#define CTRL_SV C(S(KC_V))
+#define CTRL_V C(KC_V)
 
 // home rows left side
 #define HR_GA LGUI_T(KC_A)
