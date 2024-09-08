@@ -24,7 +24,6 @@ enum custom_keycodes {
   CAPS_LT = SAFE_RANGE,
   VIM_SEL,
   SFT_ENT,
-  TMX_WIN,
   EXCL_FLT,
 };
 
@@ -32,13 +31,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t internal_timer;
 
   switch (keycode) {
-
-    case TMX_WIN:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(10) SS_TAP(X_B) SS_UP(X_LCTL) SS_DELAY(10) SS_TAP(X_W));
-        return false;
-      }
-      break;
 
     case VIM_SEL:
       if (record->event.pressed) {
@@ -102,9 +94,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
        KC_TAB,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                         KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      CTL_ESC, GUI_TAB,DSK_LEFT, ALT_TAB,DSK_RGHT, TMX_WIN,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
+      CTL_ESC, GUI_TAB,DSK_LEFT, ALT_TAB,DSK_RGHT, VIM_SEL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,EXCL_FLT, XXXXXXX, VIM_SEL, SFT_ENT, C(KC_B),                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
+      KC_LSFT,EXCL_FLT, XXXXXXX, XXXXXXX, XXXXXXX, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
