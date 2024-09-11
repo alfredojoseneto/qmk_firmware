@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       CTL_ESC, GUI_TAB,DSK_LEFT, ALT_TAB,DSK_RGHT, VIM_SEL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, CTL_ESC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      KC_LSFT,EXCL_FLT, XXXXXXX, CTRL_ALT,XXXXXXX, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
+      KC_LSFT,EXCL_FLT, XXXXXXX, CTRL_ALT,KC_LALT, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, KC_LSFT,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
