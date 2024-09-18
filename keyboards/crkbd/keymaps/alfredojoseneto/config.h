@@ -54,7 +54,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // home rows right side
 #define HR_SJ RSFT_T(KC_J)
-#define HR_CK RCTL_T(KC_K)
+#define HR_CK LCTL_T(KC_K)
 #define HR_AL LALT_T(KC_L)
 #define HR_GSCLN RGUI_T(KC_SCLN)
 
