@@ -24,7 +24,6 @@ enum custom_keycodes {
   CAPS_LT = SAFE_RANGE,
   VIM_SEL,
   SFT_ENT,
-  TMX_WIN,
   EXCL_FLT,
 };
 
@@ -32,13 +31,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t internal_timer;
 
   switch (keycode) {
-
-    case TMX_WIN:
-      if (record->event.pressed) {
-        SEND_STRING(SS_DOWN(X_LCTL) SS_DELAY(10) SS_TAP(X_B) SS_UP(X_LCTL) SS_DELAY(10) SS_TAP(X_W));
-        return false;
-      }
-      break;
 
     case VIM_SEL:
       if (record->event.pressed) {
