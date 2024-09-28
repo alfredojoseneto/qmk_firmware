@@ -31,10 +31,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define TAPPING_TERM 100
 
 #undef TAPPING_TERM
-#define TAPPING_TERM 200
+#define TAPPING_TERM 220
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
+#define QUICK_TAP_TERM_PER_KEY
 
 // defining some keycodes for better layout representation
 #define ALT_TAB LALT(KC_TAB)

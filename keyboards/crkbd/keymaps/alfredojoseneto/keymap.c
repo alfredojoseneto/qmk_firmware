@@ -27,6 +27,26 @@ enum custom_keycodes {
   EXCL_FLT,
 };
 
+uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
+  // If you quickly hold a tap-hold key after tapping it, the tap action is
+  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
+  // lead to missed triggers in fast typing. Here, returning 0 means we
+  // instead want to "force hold" and disable key repeating.
+  switch (keycode) {
+    // Repeating is useful for Vim navigation keys.
+    case HR_SJ:
+    case HR_CK:
+    case HR_AL:
+    case HR_GA:
+    case HR_AS:
+    case HR_CD:
+    case HR_SF:
+      return QUICK_TAP_TERM;  // Enable key repeating.
+    default:
+      return 0;  // Otherwise, force hold and disable key repeating.
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   static uint16_t internal_timer;
 
