@@ -20,12 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum/keymap_extras/sendstring_brazilian_abnt2.h"
 
 
-enum custom_keycodes {
-  CAPS_LT = SAFE_RANGE,
-  VIM_SEL,
-  SFT_ENT,
-  EXCL_FLT,
-};
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   // If you quickly hold a tap-hold key after tapping it, the tap action is
@@ -47,8 +41,13 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   }
 }
 
+enum custom_keycodes {
+  VIM_SEL = SAFE_RANGE,
+  SFT_ENT,
+};
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  static uint16_t internal_timer;
+  // static uint16_t internal_timer;
 
   switch (keycode) {
 
@@ -68,26 +67,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       break;
 
-    case EXCL_FLT:
-      if (record->event.pressed) {
-        SEND_STRING(SS_TAP(X_LALT) "s" "f" "1");
-        SEND_STRING(SS_DOWN(X_LCTL) "*" SS_UP(X_LCTL));
-        SEND_STRING(SS_TAP(X_LALT) "c" "o" "t");
-        SEND_STRING(SS_TAP(X_LALT) "k" "s" "r");
-        return false;
-      }
-      break;
-
-    case CAPS_LT:
-      if (record->event.pressed) {
-        internal_timer = timer_read();
-        layer_on(3);
-      } else {
-        layer_off(3);
-        if (timer_elapsed(internal_timer) < TAPPING_TERM) {
-          tap_code16(KC_CAPS);
-        }
-      }
       return false;
 
   }
@@ -116,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, GUI_TAB,DSK_LEFT, ALT_TAB,DSK_RGHT, VIM_SEL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, KC_PSCR,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,EXCL_FLT, XXXXXXX, XXXXXXX, XXXXXXX, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
