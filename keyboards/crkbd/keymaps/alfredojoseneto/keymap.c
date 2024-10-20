@@ -16,9 +16,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include QMK_KEYBOARD_H
-#include "quantum/keymap_extras/keymap_brazilian_abnt2.h"
-#include "quantum/keymap_extras/sendstring_brazilian_abnt2.h"
-
 
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
@@ -103,11 +100,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [2] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_LPRN,                      KC_RPRN, KC_AMPR, KC_ASTR, BR_QUES, KC_LCBR, _______,
+      _______, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_LPRN,                      KC_RPRN, KC_AMPR, KC_ASTR, A_QUES, KC_LCBR, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, BR_PERC, BR_BSLS, KC_MINS, KC_UNDS, KC_RBRC,                      KC_BSLS,  KC_EQL, BR_DQUO, BR_SLSH, BR_CIRC, XXXXXXX,
+      _______, KC_PERC, KC_NUBS, KC_MINS, KC_UNDS, KC_RBRC,                      KC_BSLS,  KC_EQL, KC_DQT, KC_PSLS, KC_DQUO, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, BR_LABK, BR_PIPE, BR_TILD, KC_LBRC, KC_RCBR,                      KC_PIPE, KC_PLUS, BR_QUOT, BR_COLN, BR_RABK, XXXXXXX,
+      XXXXXXX, KC_LABK,  A_PIPE, KC_QUOT, KC_LBRC, KC_RCBR,                      KC_PIPE, KC_PLUS, KC_TILD, KC_QUES, KC_RABK, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'

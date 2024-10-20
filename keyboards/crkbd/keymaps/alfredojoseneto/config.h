@@ -25,8 +25,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Select hand configuration */
 
 #define MASTER_LEFT
-// #define MASTER_RIGHT
-// #define EE_HANDS
+//#define MASTER_RIGHT
+//#define EE_HANDS
 //#define QUICK_TAP_TERM 0
 //#define TAPPING_TERM 100
 
@@ -44,8 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define CTL_ESC LCTL_T(KC_ESC)
 #define DSK_LEFT G(C(KC_LEFT))
 #define DSK_RGHT G(C(KC_RIGHT))
-#define CTRL_C C(KC_C)
-#define CTRL_V C(KC_V)
+#define A_PIPE S(KC_NUBS)
+#define A_QUES S(KC_INT1)
 
 // home rows left side
 #define HR_GA LGUI_T(KC_A)
