@@ -9,7 +9,7 @@ the Free Software Foundation, either version 2 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See he
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
@@ -19,27 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "quantum/keymap_extras/keymap_brazilian_abnt2.h"
 #include "quantum/keymap_extras/sendstring_brazilian_abnt2.h"
 
-
-
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
-  // If you quickly hold a tap-hold key after tapping it, the tap action is
-  // repeated. Key repeating is useful e.g. for Vim navigation keys, but can
-  // lead to missed triggers in fast typing. Here, returning 0 means we
-  // instead want to "force hold" and disable key repeating.
-  switch (keycode) {
-    // Repeating is useful for Vim navigation keys.
-    case HR_SJ:
-    case HR_CK:
-    case HR_AL:
-    case HR_GA:
-    case HR_AS:
-    case HR_CD:
-    case HR_SF:
-      return QUICK_TAP_TERM;  // Enable key repeating.
-    default:
-      return 0;  // Otherwise, force hold and disable key repeating.
-  }
-}
 
 enum custom_keycodes {
   VIM_SEL = SAFE_RANGE,
