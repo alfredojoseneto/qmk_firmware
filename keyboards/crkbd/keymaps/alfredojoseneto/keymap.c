@@ -23,6 +23,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 enum custom_keycodes {
   VIM_SEL = SAFE_RANGE,
   SFT_ENT,
+  NXT_TAB,
+  PRV_TAB,
+  OPN_TAB,
+  CLS_TAB,
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -42,6 +46,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case SFT_ENT:
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LSFT) SS_TAP(X_ENT) SS_UP(X_LSFT) SS_TAP(X_ESC));
+        return false;
+      }
+      break;
+
+    case NXT_TAB:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_TAB) SS_UP(X_LCTL));
+        return false;
+      }
+      break;
+
+    case PRV_TAB:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LSFT) SS_DOWN(X_LCTL) SS_TAP(X_TAB) SS_UP(X_LSFT) SS_UP(X_LCTL));
+        return false;
+      }
+      break;
+
+    case OPN_TAB:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_T) SS_UP(X_LCTL));
+        return false;
+      }
+      break;
+
+    case CLS_TAB:
+      if (record->event.pressed) {
+        SEND_STRING(SS_DOWN(X_LCTL) SS_TAP(X_W) SS_UP(X_LCTL));
         return false;
       }
       break;
@@ -74,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, GUI_TAB,DSK_LEFT, ALT_TAB,DSK_RGHT, VIM_SEL,                      KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT,  KC_INS, KC_PSCR,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, XXXXXXX,
+      XXXXXXX, CLS_TAB, PRV_TAB, OPN_TAB, NXT_TAB, SFT_ENT,                      KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_DEL, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  KC_ENT,     KC_SPC, _______, _______
                                       //`--------------------------'  `--------------------------'
